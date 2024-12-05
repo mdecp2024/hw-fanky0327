@@ -59,8 +59,36 @@
 <p><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/98efb7cb21cf2bd23c4ab1beb771a499/raw/89273b613ee437c5c8d77fd7896d598798269fb2/1%25E4%25B9%2598%25E5%2588%25B010">1x2x...x10</a></p>
 <p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/X5-ZPLtrW4c" width="560"></iframe></p>
 <p>n = 1 #重製變數<br/>for i in range(1 , 11): #設定相乘的範圍<br/> n *= i #將每個i都乘上去<br/> print(n) #輸出每個n的結果</p>
-<h3>w13_hw</h3>
-<h1>HW 2</h1>
+<h3>w13 hw</h3>
+<!-- 引入 Brython 程式庫 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- 啟動 Brython -->
+<script>
+window.onload = function() {
+    brython({debug:1, pythonpath:['/static/', '../../downloads/py/']});
+}
+</script>
+<!-- 設置容器 -->
+<div id="brython div1"></div>
+<!-- 利用 Brython 繪圖 -->
+<script type="text/python">
+from browser import html
+from browser import document as doc
+
+# 利用 HTML 建立 canvas 並定義特性
+canvas = html.CANVAS(width=400, height=400)
+brython_div = doc["brython div1"]
+brython_div <= canvas
+ctx = canvas.getContext("2d")
+
+ctx.lineWidth = 1
+ctx.strokeStyle = 'blue'
+ctx.beginPath()
+ctx.moveTo(10, 10)
+ctx.lineTo(100, 100)
+ctx.stroke()
+</script><h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
 <hr/>
