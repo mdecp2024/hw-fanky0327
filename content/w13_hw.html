@@ -142,57 +142,152 @@ img.add_border {
           
         </header>
     <div id="tipue_search_content">w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2<br /><h1>w13_hw</h1>
-<!-- 引入 Brython 程式庫 -->
+<div id="brython_div1"></div>
+<!-- 導入 brython 程式庫 -->
+<p>
 <script src="./../cmsimde/static/brython.js"></script>
 <script src="./../cmsimde/static/brython_stdlib.js"></script>
+</p>
 <!-- 啟動 Brython -->
+<p>
 <script>
-window.onload = function() {
-    brython({debug:1, pythonpath:['./../cmsimde/static/', '../../downloads/py/']});
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
 }
 </script>
-<!-- 設置容器 -->
-<div id="brython div1"></div>
-<!-- 利用 Brython 繪圖 -->
-<script type="text/python">
-from browser import html
-from browser import document as doc
+<script type="text/python3">
+from browser import html, document as doc
 
-# 利用 HTML 建立 canvas 並定義特性
-canvas = html.CANVAS(width=500, height=500)
-brython_div = doc["brython div1"]
+# 設置畫布
+canvas = html.CANVAS(width=600, height=600)
+brython_div = doc["brython_div1"]
 brython_div <= canvas
+
 ctx = canvas.getContext("2d")
+ctx.lineWidth = 2  # 增加線條寬度以使邊框更清晰
 
-ctx.lineWidth = 1
+# 點與幾何圖形的判斷函式
+def point_in_circle(x, y, cx, cy, r):
+    return (x - cx) ** 2 + (y - cy) ** 2 < r ** 2
 
-# 1. 繪製兩個矩形 (紅色邊框)
-ctx.strokeStyle = 'red'  # 設定矩形的邊框顏色為紅色
+def point_in_rectangle(x, y, rx, ry, width, height):
+    return rx <= x <= rx + width and ry <= y <= ry + height
+
+def point_outside_rectangle(x, y, rx, ry, width, height):
+    return not point_in_rectangle(x, y, rx, ry, width, height)
+
+def point_on_line(x, y, x1, y1, x2, y2):
+    return y == x and x1 <= x <= x2 and y1 <= y <= y2
+
+# 區域判定
+region_checks = [
+    ("circle1", lambda x, y: point_in_circle(x, y, 200, 200, 141.4)),
+    ("inside_square1", lambda x, y: point_in_rectangle(x, y, 100, 100, 200, 200)),
+    ("outside_square1", lambda x, y: point_outside_rectangle(x, y, 100, 100, 200, 200)),
+    ("circle2", lambda x, y: point_in_circle(x, y, 300, 300, 141.4)),
+    ("inside_square2", lambda x, y: point_in_rectangle(x, y, 200, 200, 200, 200)),
+    ("on_line_segment", lambda x, y: point_on_line(x, y, 100, 100, 300, 300)),
+    ("above_line", lambda x, y: y < x),
+    ("below_line", lambda x, y: y > x),
+]
+
+# 自定義顏色對應
+region_colors = {
+    "circle1": "#D3D3D3",  # lightgray
+    "circle2": "#0000FF",  # blue
+    "inside_square1": "#008000",  # green
+    "outside_square1": "#FFFF00",  # yellow
+    "inside_square2": "#FFFFFF",  # white
+    "on_line_segment": "#000000",  # black
+    "above_line": "#FFA500",  # orange
+    "below_line": "#FFC0CB",  # pink
+    "purple_overlap": "#00FF00",  # green
+    "cyan_above_square1": "#00FFFF",  # cyan
+    "magenta_below_square1": "#FF00FF",  # magenta
+    "orange_left_square1": "#FFA500",  # orange
+    "brown_right_square1": "#A52A2A",  # brown
+    "lightblue_above_square2": "#ADD8E6",  # lightblue
+    "pink_below_square2": "#FFC0CB",  # pink
+    "lightgreen_left_square2": "#90EE90",  # lightgreen
+    "lightyellow_right_square2": "#FFFFE0",  # lightyellow
+}
+
+# 顏色標註邏輯
+def get_region_color(x, y):
+    regions = [name for name, check in region_checks if check(x, y)]
+
+    if "circle1" not in regions and "circle2" not in regions:
+        return None
+
+    if "circle1" in regions and "circle2" in regions:
+        return region_colors["purple_overlap"]
+
+    if "circle1" in regions and "inside_square1" in regions:
+        return region_colors["inside_square1"] if "above_line" in regions else region_colors["below_line"]
+
+    if "circle1" in regions and "outside_square1" in regions:
+        if y < 100:
+            return region_colors["cyan_above_square1"]
+        elif y > 300:
+            return region_colors["magenta_below_square1"]
+        elif x < 100:
+            return region_colors["orange_left_square1"]
+        elif x > 300:
+            return region_colors["brown_right_square1"]
+
+    if "circle2" in regions and "inside_square2" in regions:
+        return region_colors["inside_square2"]
+
+    if "circle2" in regions and "outside_square1" in regions:
+        if y < 200:
+            return region_colors["lightblue_above_square2"]
+        elif y > 400:
+            return region_colors["pink_below_square2"]
+        elif x < 200:
+            return region_colors["lightgreen_left_square2"]
+        elif x > 400:
+            return region_colors["lightyellow_right_square2"]
+
+    if "on_line_segment" in regions:
+        return region_colors["on_line_segment"]
+
+    return None
+
+# 繪製掃描點並著色
+def scan_and_draw():
+    for y in range(canvas.height):
+        for x in range(canvas.width):
+            color = get_region_color(x, y)
+            if color:
+                ctx.fillStyle = color
+                ctx.fillRect(x, y, 1, 1)
+
+# 開始掃描和標示
+scan_and_draw()
+
+# 畫兩個矩形 (紅色邊框)
+ctx.strokeStyle = "red"  
+ctx.strokeRect(100, 100, 200, 200)
+ctx.strokeRect(200, 200, 200, 200)
+
+# 畫對角線 (藍色)
+ctx.strokeStyle = "blue"
 ctx.beginPath()
-ctx.rect(100, 100, 200, 200)  # 第一個正方形的左上角在(100, 100)，邊長200
-ctx.rect(200, 200, 200, 200)  # 第二個正方形的左上角在(200, 200)，邊長200
+ctx.moveTo(100, 100)
+ctx.lineTo(400, 400)
 ctx.stroke()
 
-# 2. 繪製對角線 (藍色) - 只連接第一個矩形的左上角和第一個矩形的右下角
-ctx.strokeStyle = 'blue'  # 設定對角線顏色為藍色
-ctx.beginPath()
-ctx.moveTo(100, 100)  # 起點為第一個矩形的左上角 (100, 100)
-ctx.lineTo(300, 300)  # 終點為第一個矩形的右下角 (300, 300)
-ctx.stroke()
+# 畫兩個圓形 (黑色)
+ctx.strokeStyle = "black"
+def draw_circle(cx, cy, radius):
+    ctx.beginPath()
+    ctx.arc(cx, cy, radius, 0, 2 * 3.14)
+    ctx.stroke()
 
-# 3. 繪製兩個外切圓 (黑色)
-ctx.strokeStyle = 'black'  # 設定圓的顏色為黑色
-
-# 第一個矩形的外切圓
-ctx.beginPath()
-ctx.arc(200, 200, 141.4, 0, 2 * 3.14)  # 圓心在(200, 200)，半徑為141.4（sqrt(2) * 邊長的一半）
-ctx.stroke()
-
-# 第二個矩形的外切圓
-ctx.beginPath()
-ctx.arc(300, 300, 141.4, 0, 2 * 3.14)  # 圓心在(300, 300)，半徑為141.4
-ctx.stroke()
-</script><br />w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
+draw_circle(200, 200, 141.4)
+draw_circle(300, 300, 141.4)
+</script>
+</p><br />w12 << <a href='w12.html'>Previous</a> <a href='HW 2.html'>Next</a> >> HW 2</div>
         
     <!-- footer -->
       <div class="container">
