@@ -221,7 +221,9 @@ draw_circle(300, 300, 141.4)
 <p>題目一用了本來就在Brython的程式碼，第一行的init是初始化變數，作為累加的起始點，然後upto是累加結束點，然後利用 for 重複迴圈與變數加法進行累加得出結果。</p>
 <p>題目二則是用了國中就學過的數列運算S=n(a1+an)/來寫，感覺非常好用，把數學加上程式碼這種感覺很新奇。</p>
 <p>題目三的變數累加多了一個if i % 2 == 0判斷是否為偶數的條件，題目四則是使用if '8' not in str(i)去避開8來做累加。</p>
-<p>總的來說這次作業感覺上不難，我希望我以後可以不需要利用ChatGPT就可以完成作業。</p><h1>HW 2</h1>
+<p>總的來說這次作業感覺上不難，我希望我以後可以不需要利用ChatGPT就可以完成作業。</p>
+<p>額外作業:<a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/9b03930bda817b61e2147f1187ff1e35/raw/a6b9b0a37ec599e02ae11aaf4809e45b05bab4a1/1%25E7%25B4%25AF%25E5%258A%25A0%25E5%2588%25B0100%25E9%2581%25BF%25E9%2596%258B3%25E8%25B7%259F8">1累加到100避開3跟8</a></p>
+<h1>HW 2</h1>
 <h4>主題: Python 的數列、判斷式與重複迴圈 (20%)<span style="background-color: #ffff99;"><br/></span></h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 2 and Part 3</p>
 <hr/>
@@ -232,7 +234,105 @@ draw_circle(300, 300, 141.4)
 <h2>HW 2 Exam</h2>
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 2 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
-<h1>HW 3</h1>
+<h3>w16_exam1</h3>
+<!-- 导入 Brython 程序库 -->
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+<!-- Brython 动态内容区域 -->
+<div id="brython_div1"><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/61eabdbba6cb247fee35d19f74df9af0/raw/d5aec349bb712c58e7104be3815eee6934baa8c8/w16_exam1">題目1</a></div>
+<div><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/3NzAcFXOrMg" width="560"></iframe></div>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=500, height=200)
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+
+# 取得 canvas 的繪圖上下文
+ctx = canvas.getContext("2d")
+
+# 畫出 X 軸
+ctx.beginPath()
+ctx.strokeStyle = 'black'
+ctx.lineWidth = 2
+ctx.moveTo(31, 30)  # 原點
+ctx.lineTo(200, 30) # 向右延伸
+ctx.stroke()
+
+# 畫出 Y 軸
+ctx.beginPath()
+ctx.moveTo(31, 30)  # 原點
+ctx.lineTo(31, 150)  # 向下延伸
+ctx.stroke()
+
+# 標示原點座標
+ctx.font = "12px Arial"
+ctx.fillStyle = "black"
+ctx.fillText("(31, 30)", 35, 25)
+
+ctx.font = "20px Arial"
+ctx.fillStyle = "black"
+ctx.fillText("Y", 40, 150)
+
+ctx.font = "20px Arial"
+ctx.fillStyle = "black"
+ctx.fillText("X", 185, 30)
+
+# 位移偏移量，將原點 (31, 48) 作為新的繪圖基準
+offset_x = 31
+offset_y = 48
+
+# 畫橙色六邊形
+ctx.beginPath()
+ctx.fillStyle = "#F47920"
+ctx.moveTo(offset_x + 40, offset_y + 63)
+ctx.lineTo(offset_x + 60, offset_y + 33)
+ctx.lineTo(offset_x + 90, offset_y + 33)
+ctx.lineTo(offset_x + 110, offset_y + 63)
+ctx.lineTo(offset_x + 90, offset_y + 93)
+ctx.lineTo(offset_x + 60, offset_y + 93)
+ctx.closePath()
+ctx.fill()
+
+# 畫綠色菱形
+ctx.beginPath()
+ctx.fillStyle = "#009F95"
+ctx.moveTo(offset_x + 130, offset_y + 63)
+ctx.lineTo(offset_x + 150, offset_y + 33)
+ctx.lineTo(offset_x + 170, offset_y + 63)
+ctx.lineTo(offset_x + 150, offset_y + 93)
+ctx.closePath()
+ctx.fill()
+
+# 藍色三角形 (頂點在菱形右側，方向朝下)
+ctx.beginPath()
+ctx.fillStyle = "#40B4CB"
+ctx.moveTo(offset_x + 174, offset_y + 63)  # 頂點在菱形右側
+ctx.lineTo(offset_x + 154, offset_y + 93)  # 左下角
+ctx.lineTo(offset_x + 194, offset_y + 93)  # 右下角
+ctx.closePath()
+ctx.fill()
+
+# 畫粉紅色圓形
+ctx.beginPath()
+ctx.fillStyle = "#EB008B"
+ctx.arc(offset_x + 220, offset_y + 63, 30, 0, 2* 3.14159)
+ctx.fill()
+
+# 畫黃色正方形
+ctx.beginPath()
+ctx.fillStyle = "#FDD56A"
+ctx.rect(offset_x + 260, offset_y + 43, 40, 40)
+ctx.fill()
+
+# 畫藍色矩形
+ctx.beginPath()
+ctx.fillStyle = "#003A70"
+ctx.rect(offset_x + 320, offset_y + 53, 60, 20)
+ctx.fill()
+</script><h1>HW 3</h1>
 <h4>主題: Python 的數字、演算法與迴圈 (20%)</h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 4 and Part 5</p>
 <p>完成上述流程整理後, 請將 HW3 自評分數輸入 cp2024 自評表單中.</p>
