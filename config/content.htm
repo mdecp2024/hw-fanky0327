@@ -339,7 +339,77 @@ ctx.fill()
 <h2>HW 3 Exam</h2>
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 3 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
-<h1>HW 4</h1>
+<h3>w16_exam2</h3>
+<p><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/64e4a83793da8d5de301851ba7cf0eb2/raw/0ab95c70fbf33a7fbc7e877b6bfaa27a325fdf77/w16_exam2">題目2展示</a></p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/sUuNjNuNSIA" width="560"></iframe></p>
+<div id="brython_div1"></div>
+<!-- 導入 brython 程式庫 -->
+<p>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+</p>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=300, height=300)
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+
+# 獲取繪圖上下文
+ctx = canvas.getContext("2d")
+
+# 設定迷宮線條的顏色與寬度
+line_color = "blue"
+line_width = 2
+ctx.strokeStyle = line_color
+ctx.lineWidth = line_width
+
+# 新的原點
+origin_x, origin_y = 31, 30
+
+# 繪製迷宮
+lines = [
+    [(0, -22), (80, -22)],
+    [(120, -22), (200, -22)],
+    [(0, -22), (0, 178)],
+    [(200, -22), (200, 178)],
+    [(0, 178), (80, 178)],
+    [(200, 178), (120, 178)],
+    [(40, 18), (160, 18)],
+    [(160, 18), (160, 58)],
+    [(80, 18), (80, 58)],
+    [(80, 58), (0, 58)],
+    [(40, 98), (160, 98)],
+    [(160, 98), (160, 178)],
+    [(120, 98), (120, 58)],
+    [(40, 98), (40, 138)],
+    [(80, 178), (80, 138)],
+    [(80, 138), (120, 138)],
+]
+
+# 根據新原點繪製所有線條
+for line in lines:
+    (x1, y1), (x2, y2) = line
+    ctx.beginPath()
+    ctx.moveTo(origin_x + x1, origin_y + y1)
+    ctx.lineTo(origin_x + x2, origin_y + y2)
+    ctx.stroke()
+
+# 標註原點
+ctx.fillStyle = "red"
+ctx.font = "10px Arial"
+ctx.fillText("原點(31,30)", 30, 220)
+</script>
+</p><h1>HW 4</h1>
 <h4>主題: 利用 Python 控制機電模擬系統 (20%)</h4>
 <p style="padding-left: 30px;">利用 <a href="https://solvespace.com/">https://solvespace.com/</a> 建立機械系統零組件</p>
 <p style="padding-left: 30px;">利用 <a href="https://www.coppeliarobotics.com/">CoppeliaSim</a> 建立機電模擬系統</p>
@@ -351,6 +421,7 @@ ctx.fill()
 <h2>HW 4 Exam</h2>
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 4 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
+<h3>w16_exam3</h3>
 <h1>Final Report</h1>
 <p>期末口頭與書面專題報告 (20%)</p>
 <p>期末口頭專題報告影片:</p>
