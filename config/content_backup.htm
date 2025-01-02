@@ -235,12 +235,19 @@ draw_circle(300, 300, 141.4)
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 2 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
 <h3>w16_exam1</h3>
+<div id="brython_div1"><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/61eabdbba6cb247fee35d19f74df9af0/raw/d5aec349bb712c58e7104be3815eee6934baa8c8/w16_exam1">題目1展示</a></div>
+<div><iframe allowfullscreen="allowfullscreen" data-mce-fragment="1" height="314" src="//www.youtube.com/embed/3NzAcFXOrMg" width="560"></iframe></div>
+<p></p>
 <!-- 导入 Brython 程序库 -->
+<p>
 <script src="/static/brython.js"></script>
 <script src="/static/brython_stdlib.js"></script>
+</p>
 <!-- Brython 动态内容区域 -->
-<div id="brython_div1"><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/61eabdbba6cb247fee35d19f74df9af0/raw/d5aec349bb712c58e7104be3815eee6934baa8c8/w16_exam1">題目1</a></div>
-<div><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/3NzAcFXOrMg" width="560"></iframe></div>
+<div id="brython_div1"><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/61eabdbba6cb247fee35d19f74df9af0/raw/d5aec349bb712c58e7104be3815eee6934baa8c8/w16_exam1"></a></div>
+<div id="brython_div1"><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/61eabdbba6cb247fee35d19f74df9af0/raw/d5aec349bb712c58e7104be3815eee6934baa8c8/w16_exam1"></a></div>
+<div id="brython_div1"><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/61eabdbba6cb247fee35d19f74df9af0/raw/d5aec349bb712c58e7104be3815eee6934baa8c8/w16_exam1"></a></div>
+<p>
 <script type="text/python3">
 from browser import html
 from browser import document as doc
@@ -332,7 +339,8 @@ ctx.beginPath()
 ctx.fillStyle = "#003A70"
 ctx.rect(offset_x + 320, offset_y + 53, 60, 20)
 ctx.fill()
-</script><h1>HW 3</h1>
+</script>
+</p><h1>HW 3</h1>
 <h4>主題: Python 的數字、演算法與迴圈 (20%)</h4>
 <p style="padding-left: 30px;">Python 課程教材: <a href="https://www.learnpythonwithjupyter.com/">https://www.learnpythonwithjupyter.com/</a> - PART 4 and Part 5</p>
 <p>完成上述流程整理後, 請將 HW3 自評分數輸入 cp2024 自評表單中.</p>
@@ -341,6 +349,7 @@ ctx.fill()
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 3 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
 <h3>w16_exam2</h3>
 <p><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/64e4a83793da8d5de301851ba7cf0eb2/raw/0ab95c70fbf33a7fbc7e877b6bfaa27a325fdf77/w16_exam2">題目2展示</a></p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/sUuNjNuNSIA" width="560"></iframe></p>
 <div id="brython_div1"></div>
 <!-- 導入 brython 程式庫 -->
 <p>
@@ -421,7 +430,156 @@ ctx.fillText("原點(31,30)", 30, 220)
 <p>每六人為一組進行協同程式練習</p>
 <p>透過 Jupyterlab 協同網頁, 輪流指定各組編寫 HW 4 相關的程式練習, 以及網頁內容 (localhost 與 Codespaces 環境)編輯.</p>
 <h3>w16_exam3</h3>
-<h1>Final Report</h1>
+<p><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/57a4b8f9da7d2621594a70ade9ce77d0/raw/037052559fa636749898b86e756a654e81cf8335/w16_exam3">題目三展示</a></p>
+<div id="brython_div1"></div>
+<!-- 導入 brython 程式庫 -->
+<p>
+<script src="/static/brython.js"></script>
+<script src="/static/brython_stdlib.js"></script>
+</p>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=300, height=300)
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+
+# 獲取繪圖上下文
+ctx = canvas.getContext("2d")
+
+# 設定迷宮線條的顏色與寬度
+line_color = "blue"
+line_width = 2
+ctx.strokeStyle = line_color
+ctx.lineWidth = line_width
+
+# 新的原點
+origin_x, origin_y = 31, 30
+
+# 繪製迷宮
+lines = [
+    [(0, -22), (80, -22)],
+    [(120, -22), (200, -22)],
+    [(0, -22), (0, 178)],
+    [(200, -22), (200, 178)],
+    [(0, 178), (80, 178)],
+    [(200, 178), (120, 178)],
+    [(40, 18), (160, 18)],
+    [(160, 18), (160, 58)],
+    [(80, 18), (80, 58)],
+    [(80, 58), (0, 58)],
+    [(40, 98), (160, 98)],
+    [(160, 98), (160, 178)],
+    [(120, 98), (120, 58)],
+    [(40, 98), (40, 138)],
+    [(80, 178), (80, 138)],
+    [(80, 138), (120, 138)],
+]
+
+# 根據新原點繪製所有線條
+for line in lines:
+    (x1, y1), (x2, y2) = line
+    ctx.beginPath()
+    ctx.moveTo(origin_x + x1, origin_y + y1)
+    ctx.lineTo(origin_x + x2, origin_y + y2)
+    ctx.stroke()
+# 設定紅色線條的顏色與寬度
+line_color = "red"
+ctx.strokeStyle = line_color
+ctx.lineWidth = 2
+
+# 繪製新的紅色線條
+ctx.beginPath()
+ctx.moveTo(131, 8)  # 新紅色線條的起點
+ctx.lineTo(131, 28)  # 新紅色線條的終點
+ctx.stroke()
+
+# 繪製另一條紅色線條
+ctx.beginPath()
+ctx.moveTo(131, 28)  
+ctx.lineTo(211, 28)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(211, 28)  
+ctx.lineTo(211, 108)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(211, 108)  
+ctx.lineTo(171, 108)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(171, 108)  
+ctx.lineTo(171, 68)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(171, 68)  
+ctx.lineTo(131, 68)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(131, 68)  
+ctx.lineTo(131, 108)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(131, 108)  
+ctx.lineTo(51, 108)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(51, 108)  
+ctx.lineTo(51, 188)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(51, 188)  
+ctx.lineTo(91, 188)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(91, 188)  
+ctx.lineTo(91, 148)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(91, 148)  
+ctx.lineTo(171, 148)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(171, 148)  
+ctx.lineTo(171, 188)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(171, 188)  
+ctx.lineTo(131, 188)  
+ctx.stroke()
+
+ctx.beginPath()
+ctx.moveTo(131, 188)  
+ctx.lineTo(131, 208)  
+ctx.stroke()
+
+# 標註原點
+ctx.fillStyle = "red"
+ctx.font = "10px Arial"
+ctx.fillText("原點(31,30)", 30, 220)
+</script>
+</p><h1>Final Report</h1>
 <p>期末口頭與書面專題報告 (20%)</p>
 <p>期末口頭專題報告影片:</p>
 <p style="padding-left: 30px;">......</p>
