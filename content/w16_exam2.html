@@ -141,9 +141,77 @@ img.add_border {
           </div>
           
         </header>
-    <div id="tipue_search_content">HW 1 Exam << <a href='HW 1 Exam.html'>Previous</a> <a href='w10.html'>Next</a> >> w10<br /><h1>w7</h1>
-<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/wzo5JzJt_y4" width="560"></iframe></p>
-<br />HW 1 Exam << <a href='HW 1 Exam.html'>Previous</a> <a href='w10.html'>Next</a> >> w10</div>
+    <div id="tipue_search_content">HW 3 Exam << <a href='HW 3 Exam.html'>Previous</a> <a href='HW 4.html'>Next</a> >> HW 4<br /><h1>w16_exam2</h1>
+<p><a href="https://mdecp2024.github.io/hw-fanky0327/content/Brython.html?src=https://gist.githubusercontent.com/fanky0327/64e4a83793da8d5de301851ba7cf0eb2/raw/0ab95c70fbf33a7fbc7e877b6bfaa27a325fdf77/w16_exam2">題目2展示</a></p>
+<p><iframe allowfullscreen="allowfullscreen" height="314" src="//www.youtube.com/embed/sUuNjNuNSIA" width="560"></iframe></p>
+<div id="brython_div1"></div>
+<!-- 導入 brython 程式庫 -->
+<p>
+<script src="./../cmsimde/static/brython.js"></script>
+<script src="./../cmsimde/static/brython_stdlib.js"></script>
+</p>
+<!-- 啟動 Brython -->
+<p>
+<script>
+window.onload=function(){
+brython({debug:1, pythonpath:['./../cmsimde/static/','./../downloads/py/']});
+}
+</script>
+<script type="text/python3">
+from browser import html
+from browser import document as doc
+
+# 利用 html 建立 canvas 超文件物件
+canvas = html.CANVAS(width=300, height=300)
+brython_div = doc["brython_div1"]
+brython_div <= canvas
+
+# 獲取繪圖上下文
+ctx = canvas.getContext("2d")
+
+# 設定迷宮線條的顏色與寬度
+line_color = "blue"
+line_width = 2
+ctx.strokeStyle = line_color
+ctx.lineWidth = line_width
+
+# 新的原點
+origin_x, origin_y = 31, 30
+
+# 繪製迷宮
+lines = [
+    [(0, -22), (80, -22)],
+    [(120, -22), (200, -22)],
+    [(0, -22), (0, 178)],
+    [(200, -22), (200, 178)],
+    [(0, 178), (80, 178)],
+    [(200, 178), (120, 178)],
+    [(40, 18), (160, 18)],
+    [(160, 18), (160, 58)],
+    [(80, 18), (80, 58)],
+    [(80, 58), (0, 58)],
+    [(40, 98), (160, 98)],
+    [(160, 98), (160, 178)],
+    [(120, 98), (120, 58)],
+    [(40, 98), (40, 138)],
+    [(80, 178), (80, 138)],
+    [(80, 138), (120, 138)],
+]
+
+# 根據新原點繪製所有線條
+for line in lines:
+    (x1, y1), (x2, y2) = line
+    ctx.beginPath()
+    ctx.moveTo(origin_x + x1, origin_y + y1)
+    ctx.lineTo(origin_x + x2, origin_y + y2)
+    ctx.stroke()
+
+# 標註原點
+ctx.fillStyle = "red"
+ctx.font = "10px Arial"
+ctx.fillText("原點(31,30)", 30, 220)
+</script>
+</p><br />HW 3 Exam << <a href='HW 3 Exam.html'>Previous</a> <a href='HW 4.html'>Next</a> >> HW 4</div>
         
     <!-- footer -->
       <div class="container">
